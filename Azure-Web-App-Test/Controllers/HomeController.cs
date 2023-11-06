@@ -7,14 +7,17 @@ namespace Azure_Web_App_Test.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IConfiguration _config;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IConfiguration config)
         {
             _logger = logger;
+            _config = config;
         }
 
         public IActionResult Index()
         {
+            ViewData["Greeting"] = _config["Greeting"];
             return View();
         }
 
